@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation=
+               "http://www.springframework.org/schema/beans
+               http://www.springframework.org/schema/beans/spring-beans.xsd
+               http://www.springframework.org/schema/context
+               https://www.springframework.org/schema/context/spring-context.xsd">
+    
+    <context:component-scan base-package="lesson1Homework.xmlContext"/>
+
+    <bean id="rifleAKC74" class="lesson1Homework.xmlContext.AKC74">
+        <constructor-arg name="name" value="rifleAKC74"/>
+        <property name="magazine" ref="simpleCartridgesMagazine"/>
+    </bean>
+
+    <bean id="rifleAK74HInnerBean" class="lesson1Homework.xmlContext.AK74H">
+        <constructor-arg name="name" value="rifleAK74HInnerBean"/>
+        <property name="magazine">
+            <bean class="lesson1Homework.xmlContext.Magazine">
+                <constructor-arg name="name" value="AK74HInnerBeanMagazine"/>
+            </bean>
+        </property>
+    </bean>
+
+    <bean id="rifleAK74HConstructor" class="lesson1Homework.xmlContext.AK74H">
+        <constructor-arg name="name" value="rifleAK74HConstructor"/>
+        <constructor-arg name="magazine" ref="trasserCartridgesMagazine"/>
+    </bean>
+
+    <bean id ="simpleCartridgesMagazine" class="lesson1Homework.xmlContext.Magazine">
+        <constructor-arg name="name" value="simpleCartridgesMagazine"/>
+    </bean>
+
+    <bean id ="trasserCartridgesMagazine" class="lesson1Homework.xmlContext.Magazine">
+        <constructor-arg index="0" value="true"/>
+        <constructor-arg name="name" value="trasserCartridgesMagazine"/>
+    </bean>
+
+</beans>
