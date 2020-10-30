@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="|Товар с id = ${product.id}|"></title>
+</head>
+<body>
+<a href = "/app/products"><p>На главную</p></a>
+<h2 th:text="|Товар с id = ${product.id}|"></h2>
+<p th:text="|${product.title} - ${product.ufCost[0]}р. ${product.ufCost[1]}к.|"/>
+<form th:action="@{|/products/${product.id}/delete|}" method="get">
+    <p><button type="submit">Удалить без подтверждения</button></p>
+</form>
+</body>
+</html>
