@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Список всех товаров</title>
+</head>
+<body>
+<a href = "/app/products"><p>На главную</p></a>
+<h2>Список всех товаров</h2>
+<a th:each="product : ${products}" th:href="@{${product.id}}">
+    <p
+            th:text="|${product.title} - ${product.ufCost[0]}р. ${product.ufCost[1]}к.|"/>
+</a>
+</body>
+</html>
