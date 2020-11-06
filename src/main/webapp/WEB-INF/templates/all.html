@@ -9,7 +9,7 @@
 <h2>Список всех товаров</h2>
 <a th:each="product : ${products}" th:href="@{${product.id}}">
     <p
-            th:text="|${product.title} - ${product.ufCost[0]}р. ${product.ufCost[1]}к.|"/>
+            th:text="|${product.title} - ${product.cost}к.|"/>
 </a>
 </body>
 </html>

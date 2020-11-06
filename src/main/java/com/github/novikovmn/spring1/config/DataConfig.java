@@ -17,7 +17,7 @@ import java.util.Properties;
 @Configuration
 @EnableJpaRepositories("com.github.novikovmn.spring1.repo")
 @EnableTransactionManagement
-@ComponentScan("com.github.novikovmn.spring1")
+@ComponentScan("com.github.novikovmn.spring1.entities")
 public class DataConfig {
     @Bean(name = "dataSource")
     public DataSource getDataSource() {
@@ -25,7 +25,7 @@ public class DataConfig {
         dataSource.setUrl("jdbc:postgresql://localhost:5432/spring1");
         dataSource.setUsername("geek");
         dataSource.setPassword("geek");
-        dataSource.setDriverClassName("org.postgresql.driver");
+        dataSource.setDriverClassName("org.postgresql.Driver");
         return dataSource;
     }
 
@@ -34,13 +34,14 @@ public class DataConfig {
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
         factory.setDataSource(getDataSource());
         factory.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
-        factory.setPackagesToScan("gom.github.novikovmn.spring1");
+        factory.setPackagesToScan("com.github.novikovmn.spring1.entities");
         Properties jpaProperties = new Properties();
         jpaProperties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQL94Dialect");
         jpaProperties.put("hibernate.max_fetch_depth", 3);
         jpaProperties.put("hibernate.jdbc.fetch_size", 50);
         jpaProperties.put("hibernate.jdbc.batch_size", 10);
         jpaProperties.put("hibernate.show_sql", true);
+        jpaProperties.put("hibernate.hbm2ddl.auto", "update");
         factory.setJpaProperties(jpaProperties);
         return factory;
     }
