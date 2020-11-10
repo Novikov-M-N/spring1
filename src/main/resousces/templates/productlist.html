@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}">Заголовок страницы списка товаров</title>
+</head>
+<body>
+<a href = "/app"><p>На главную</p></a>
+<h2 th:text="${title}"></h2>
+<a th:each="product : ${products}" th:href="@{'/product?id=' + ${product.id}}">
+    <p th:text="|${product.title} - ${costFormatter.print(product.cost)}|"/>
+</a>
+<p>
+    <form action="/app/products/" method="get">
+        Цена: от
+        <input name="minrub" type="number" min="0" max="1000000" size="7" th:value="${minrub}"/>р.
+        <input name="mincop" type="number" min="0" max="99" size="3" th:value="${mincop}"/>к.
+        до
+        <input name="maxrub" type="number" min="0" max="1000000" size="7" th:value="${maxrub}"/>р.
+        <input name="maxcop" type="number" min="0" max="99" size="3" th:value="${maxcop}"/>к.
+        <button type="submit">Фильровать</button>
+    </form>
+</p>
+<p>
+    Страницы:&nbsp
+    <span th:each="n: ${#numbers.sequence(1, total_pages)}">
+        <span th:unless="${n == page}">
+            <a th:text="${n}" th:href="@{'/products/' + ${link} + ${n}}"/>
+        </span>
+        <span th:if="${n == page}" th:text="${n}"/>
+        &nbsp
+    </span>
+</p>
+</body>
+</html>
