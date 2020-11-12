@@ -1,0 +1,16 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /app
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:postgresql://localhost:5432/spring1
+    username: geek
+    password: geek
+  thymeleaf:
+    check-template: true
+    check-template-location: true
+#    enabled: true
