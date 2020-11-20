@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}">Заголовок страницы списка пользователей</title>
+</head>
+<body>
+<a href = "/app"><p>На главную</p></a>
+<h2 th:text="${title}"></h2>
+<th:block th:each="user : ${users}">
+    <th:block th:unless="${user.username == 'root'}">
+        <h3 th:text="${user.username}"/>
+        <p th:if="${user.enabled} == 1">
+            <span th:text="'Пользователь валиден'"/>
+        </p>
+        <p th:unless="${user.enabled} == 1">
+            <span th:text="'Пользователь не валиден'"/>
+        </p>
+        <p th:text="'Доступные роли:'"/>
+        <th:block th:each="authority : ${user.authorities}">
+            <p>
+                <span th:text="| ${authority.authority}"|/>
+            </p>
+        </th:block>
+    </th:block>
+</th:block>
+</body>
+</html>

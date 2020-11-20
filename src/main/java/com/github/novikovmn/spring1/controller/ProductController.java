@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -97,14 +98,6 @@ public class ProductController {
         model.addAttribute("product", product);
         model.addAttribute("costFormatter", costFormatter);
         return "product";
-    }
-
-    // app/product/save
-    @RequestMapping(value = {"/product/save","/product/save/"}, method = RequestMethod.POST)
-    public String productSave(Product product, Integer rub, Integer cop) {
-        product.setCost(costFormatter.parse(rub, cop));
-        productService.save(product);
-        return "redirect:/product?id=" + product.getId();
     }
 
     public Integer parceInt(Map<String, String> params, String key) {

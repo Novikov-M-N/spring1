@@ -7,13 +7,9 @@
 <body>
 <h2>Тест контроллера товаров</h2>
 <a href="/app/products"><p>Список товаров</p></a>
+<a href="/app/admin/products"><p>Список товаров - админка</p></a>
+<a href="/app/admin/users"><p>Список пользователей - админка</p></a>
 <a href="/app/rest/products"><p>REST - cписок товаров</p></a>
 <a href="/app/rest/products/11"><p>REST - товар с id = 11</p></a>
-<form action="" th:action="@{/rest/products}" th:object="${product}" th:method="POST">
-    <input th:field="*{id}" type="hidden"/>
-    <input th:field="*{title}" type="text" size="50"/>&nbsp-&nbsp
-    <input th:field="*{cost}" type="number" min="0" max="100000000" size="9"/>к.&nbsp
-    <button type="submit">Добавить новый продукт</button>
-</form>
 </body>
 </html>
