@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${title}">Заголовок админской страницы списка товаров</title>
+</head>
+<body>
+<a href = "/app"><p>На главную</p></a>
+<h2 th:text="${title}">Заголовок админской страницы списка товаров</h2>
+    <form th:each="product : ${products}"
+          action="" th:action="@{/admin/products/save}"
+          th:object="${product}" method="post">
+        <input name="page" th:value="${page}" type="hidden"/>
+        <input name="id" th:value="${product.id}" type="hidden"/>
+        <input name = "title" th:value="${product.title}" type="text" required size="50"/>&nbsp-&nbsp
+        <input name="rub" type="number" min="0" max="1000000" size="7" th:value="${costFormatter.getRub(product.cost)}"/>р.&nbsp
+        <input name="cop" type="number" min="0" max="99" size="5" th:value="${costFormatter.getCop(product.cost)}"/>к.
+        <button type="submit">Сохранить изменения</button>
+        <a href="" th:href="@{'/admin/products/delete?id=' + ${product.id} + '&page=' + ${page}}">🗑</a>
+    </form>
+<p>
+    <form action="" th:action="@{/admin/products/add}" method="post">
+        <input name="page" th:value="${page}" type="hidden"/>
+        <input name = "title" type="text" required size="50"/>&nbsp-&nbsp
+        <input name="rub" type="number" min="0" max="1000000" size="7"/>р.&nbsp
+        <input name="cop" type="number" min="0" max="99" size="5"/>к.
+        <button type="submit">Добавить новый товар</button>
+    </form>
+</form>
+</p>
+<p>
+    Страницы:&nbsp
+    <span th:each="n: ${#numbers.sequence(1, total_pages)}">
+        <span th:unless="${n == page}">
+            <a th:text="${n}" th:href="@{'/admin/products/' + ${link} + ${n}}"/>
+        </span>
+        <span th:if="${n == page}" th:text="${n}"/>
+        &nbsp
+    </span>
+</p>
+</body>
+</html>

@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="|Товар с id = ${product.id}|">Заголовок страницы с данными о товаре</title>
+</head>
+<p>
+    <a href = "/app"><p>На главную</p></a>
+<h2 th:text="|Товар с id = ${product.id}|">Заголовок страницы с данными о товаре</h2>
+<p th:text="|${product.title} - ${costFormatter.print(product.cost)}|"/>
+</body>
+</html>
